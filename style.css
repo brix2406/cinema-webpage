@@ -102,8 +102,7 @@ button {
 }
 
 .hero-button,
-.ticket-button,
-.login-container button {
+.ticket-button {
     display: inline-block;
     padding: 12px 20px;
     background: #cb0228;
@@ -115,8 +114,7 @@ button {
 }
 
 .hero-button:hover,
-.ticket-button:hover,
-.login-container button:hover {
+.ticket-button:hover {
     background: #ff1641;
 }
 
@@ -250,7 +248,8 @@ button {
     }
 }
 
-/* Login-page */
+
+/* Log-in and sign-in page */
 .login-container {
     max-width: 400px;
     margin: 100px auto;
@@ -278,13 +277,27 @@ button {
     font-size: 16px;
 }
 
+.login-container button {
+    padding: 12px;
+    margin-top: 15px;
+    background-color: #cb0228;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.login-container button:hover {
+    background-color: #ff1641;
+}
+
 .login-container p {
     text-align: center;
     margin-top: 20px;
 }
 
 .login-container a {
-    color: #e6b85c;
+    color: #ff6060;
     text-decoration: none;
 }
 
