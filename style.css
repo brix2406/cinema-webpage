@@ -48,7 +48,7 @@ button {
 
 .navbar a:hover,
 .section-heading a:hover {
-    color: #ffca65;
+    color: #ff6060;
 }
 
 .cart-link {
@@ -57,6 +57,7 @@ button {
     align-items: center;
 }
 
+/* home page movies */
 .hero {
     height: 390px;
     position: relative;
@@ -101,19 +102,22 @@ button {
 }
 
 .hero-button,
-.ticket-button {
+.ticket-button,
+.login-container button {
     display: inline-block;
     padding: 12px 20px;
-    background: #efb744;
+    background: #cb0228;
     border-radius: 5px;
-    color: #191919;
+    border: none;
+    color: #e0e0e0;
     font-weight: bold;
     text-align: center;
 }
 
 .hero-button:hover,
-.ticket-button:hover {
-    background: #ffd277;
+.ticket-button:hover,
+.login-container button:hover {
+    background: #ff1641;
 }
 
 .hero-arrow {
@@ -158,7 +162,6 @@ button {
 
 .section-heading a {
     font-size: 14px;
-    color: #efb744;
 }
 
 .movie-grid {
@@ -245,4 +248,47 @@ button {
     .hero-overlay {
         left: 58px;
     }
+}
+
+/* Login-page */
+.login-container {
+    max-width: 400px;
+    margin: 100px auto;
+    padding: 35px;
+    background-color: #252525;
+    border-radius: 10px;
+    color: white;
+}
+
+.login-container h1 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.login-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.login-container input {
+    padding: 12px;
+    border: 1px solid #777;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.login-container p {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.login-container a {
+    color: #e6b85c;
+    text-decoration: none;
+}
+
+.error {
+    color: #ff7777;
+    font-size: 14px;
 }
