@@ -40,8 +40,7 @@ button {
     letter-spacing: 1px;
 }
 
-.nav-links,
-.nav-actions {
+.nav-links {
     display: flex;
     align-items: center;
     gap: 28px;
