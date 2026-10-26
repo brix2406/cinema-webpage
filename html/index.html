@@ -6,25 +6,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Screendenavia Cinema</title>
   <link rel="stylesheet" href="../style.css">
-  <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
   <!-- Navigation bar -->
-  <header class="site-header">
-    <nav class="navbar">
-      <img src="../media/screendinavia.png" id="logo" alt="Screendinavia" width="auto" height="100px">
-      <div class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="movies.html">Movies</a>
-        <a href="login.html">Login</a>
-        <a href="cart.php" class="cart-link" aria-label="Shopping Cart">
-            <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-        </a>
-      </div>
-    </nav>
-  </header>
+  <div id="site-header"></div>
+  <script>
+    fetch('header.html')
+      .then(response => {
+        if (!response.ok) throw new Error('Network response was not ok');
+        return response.text();
+      })
+      .then(data => {
+        document.getElementById('site-header').innerHTML = data;
+      })
+      .catch(error => console.error('Error loading header:', error));
+  </script>
 
   <main>
     <!-- Featured movies: replace the image with your own cinema banner -->
