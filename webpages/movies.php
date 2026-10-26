@@ -1,3 +1,23 @@
+<?php
+require("../php/db.php");
+$query = "SELECT movieId, title, genre, posterPath FROM movies
+          WHERE lastScreening >= CURDATE() ORDER BY lastScreening ASC";
+
+$result = $db->query($query);
+$movies = [];
+if ($result) {
+  $i = 0;
+  while ($row = $result->fetch_assoc()) {
+    $movies[$i] = [
+      'movieId' => $row['movieId'],
+      'title' => $row['title'],
+      'genre' => $row['genre'],
+      'posterPath' => $row['posterPath']
+    ];
+    $i++;
+  }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,70 +51,20 @@
         <h2 id="now-showing-title">All Movies</h2>
       </div>
       <div class="movie-grid">
-        <article class="movie-card">
-          <img src="images/movie1.jpg" alt="Poster for Movie One">
-          <div class="movie-info">
-            <h3>Movie One</h3>
-            <p>Action / Adventure</p>
-            <a href="movie-details.php?id=1" class="ticket-button">Buy Tickets</a>
-          </div>
-        </article>
-        <article class="movie-card">
-          <img src="images/movie2.jpg" alt="Poster for Movie Two">
-          <div class="movie-info">
-            <h3>Movie Two</h3>
-            <p>Comedy / Romance</p>
-            <a href="movie-details.php?id=2" class="ticket-button">Buy Tickets</a>
-          </div>
-        </article>
-        <article class="movie-card">
-          <img src="images/movie3.jpg" alt="Poster for Movie Three">
-          <div class="movie-info">
-            <h3>Movie Three</h3>
-            <p>Drama / Thriller</p>
-            <a href="movie-details.php?id=3" class="ticket-button">Buy Tickets</a>
-          </div>
-        </article>
-        <article class="movie-card">
-          <img src="images/movie4.jpg" alt="Poster for Movie Four">
-          <div class="movie-info">
-            <h3>Movie Four</h3>
-            <p>Animation / Family</p>
-            <a href="movie-details.php?id=4" class="ticket-button">Buy Tickets</a>
-          </div>
-        </article>
-        <article class="movie-card">
-          <img src="images/movie5.jpg" alt="Poster for Movie Five">
-          <div class="movie-info">
-            <h3>Movie Five</h3>
-            <p>Comedy</p>
-            <a href="movie-details.php?id=5" class="ticket-button">Buy Tickets</a>
-          </div>
-        </article>
-        <article class="movie-card">
-          <img src="images/movie6.jpg" alt="Poster for Movie Six">
-          <div class="movie-info">
-            <h3>Movie Six</h3>
-            <p>Comedy / Romance</p>
-            <a href="movie-details.php?id=6" class="ticket-button">Buy Tickets</a>
-          </div>
-        </article>
-        <article class="movie-card">
-          <img src="images/movie7.jpg" alt="Poster for Movie Seven">
-          <div class="movie-info">
-            <h3>Movie Seven</h3>
-            <p>Action</p>
-            <a href="movie-details.php?id=7" class="ticket-button">Buy Tickets</a>
-          </div>
-        </article>
-        <article class="movie-card">
-          <img src="images/movie8.jpg" alt="Poster for Movie Eight">
-          <div class="movie-info">
-            <h3>Movie Eight</h3>
-            <p>Drama</p>
-            <a href="movie-details.php?id=8" class="ticket-button">Buy Tickets</a>
-          </div>
-        </article>
+        <?php for ($i = 0; $i < count($movies); $i++) { ?>
+          <article class="movie-card">
+            <img src="<?php echo htmlspecialchars($movies[$i]['posterPath']); ?>"
+              alt="Poster for <?php echo htmlspecialchars($movies[$i]['title']); ?>">
+            <div class="movie-info">
+              <h3>
+                <?php echo htmlspecialchars($movies[$i]['title']); ?>
+              </h3>
+              <p><?php echo htmlspecialchars($movies[$i]['genre']); ?></p>
+              <a href="movie-details.php?id=<?php echo htmlspecialchars($movies[$i]['movieId']); ?>"
+                class="ticket-button">Buy Tickets</a>
+            </div>
+          </article>
+        <?php } ?>
       </div>
     </section>
   </main>
