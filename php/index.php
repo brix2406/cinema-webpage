@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,11 +18,15 @@
   <!-- Navigation bar -->
   <header class="site-header">
     <nav class="navbar">
-      <img src="../media/screendinavia.png" id="logo" alt="Screendinavia" width="auto" height="100px">
+      <img src="../media/logo.png" id="logo" alt="Screendinavia" width="auto" height="60px">
       <div class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="movies.html">Movies</a>
-        <a href="login.html">Login</a>
+        <a href="index.php">Home</a>
+        <a href="../html/movies.html">Movies</a>
+        <?php if (isset($_SESSION["userId"])): ?>
+            <a href="../php/logout.php">Logout</a>
+        <?php else: ?>
+            <a href="../html/login.html">Login</a>
+        <?php endif; ?>
         <a href="cart.php" class="cart-link" aria-label="Shopping Cart">
             <i class="fa fa-shopping-cart" aria-hidden="true"></i>
         </a>

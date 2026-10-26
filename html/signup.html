@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="../style.css">
   <link rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="../javascript/validation.js" defer></script>
 </head>
 
 <body>
@@ -15,11 +16,11 @@
   <header class="site-header">
     <nav class="navbar">
       <!-- ADD LOGO HERE -->
-      <img src="" id="logo" alt="Screendinavia">
+      <img src="../media/screendinavia.png" id="logo" alt="Screendinavia" width="auto" height="100px">
       <div class="nav-links">
-        <a href="index.html">Home</a>
+        <a href="../php/index.php">Home</a>
         <a href="movies.html">Movies</a>
-        <a href="login.php">Login</a>
+        <a href="login.html">Login</a>
         <a href="cart.php" class="cart-link" aria-label="Shopping Cart">
             <i class="fa fa-shopping-cart" aria-hidden="true"></i>
         </a>
@@ -33,7 +34,7 @@
         <div id="sign-up">
             <h1>Create Account</h1>
 
-            <form action="register.php" method="POST"
+            <form action="../php/register.php" method="POST"
                   id="signup-form">
 
                 <label for="signup-email">Email</label>
@@ -63,6 +64,14 @@
   <footer class="site-footer">
     <p>&copy; 2026 Screendinavia Cinema</p>
   </footer>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+
+    if (params.get("error") === "email_exists") {
+        alert("This email is already registered. Please try to login instead.");
+    }
+</script>
 </body>
 
 </html>
