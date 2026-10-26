@@ -1,3 +1,25 @@
+<?php
+define('gridSize', 4);
+require("../php/db.php");
+$query = "SELECT movieId, title, genre, posterPath FROM movies
+          WHERE lastScreening >= CURDATE() ORDER BY lastScreening ASC";
+
+$result = $db->query($query);
+$movies = [];
+if ($result) {
+  $i = 0;
+  while ($row = $result->fetch_assoc()) {
+    $movies[$i] = [
+      'movieId' => $row['movieId'],
+      'title' => $row['title'],
+      'genre' => $row['genre'],
+      'posterPath' => $row['posterPath']
+    ];
+    $i++;
+  }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,11 +49,11 @@
   <main>
     <!-- Featured movies: replace the image with your own cinema banner -->
     <section class="hero" aria-label="Featured movies">
-      <img id="hero-image" src="images/banner1.jpg" alt="Featured movie banner">
+      <img id="hero-image" src="../media/moviePosters/by_any_means.jpeg" alt="Featured movie banner">
       <div class="hero-overlay">
         <p>WELCOME TO SCREENDINAVIA</p>
         <h1 id="hero-title">Experience movies on the big screen</h1>
-        <a href="movies.html" class="hero-button">Explore Movies</a>
+        <a href="movies.php" class="hero-button">Explore Movies</a>
       </div>
       <button class="hero-arrow previous" id="prev-slide" type="button"
         aria-label="Previous featured movie">&#10094;</button>
@@ -42,41 +64,21 @@
     <section class="now-showing" aria-labelledby="now-showing-title">
       <div class="section-heading">
         <h2 id="now-showing-title">Now Showing</h2>
-        <a href="movies.html">View All Movies →</a>
+        <a href="movies.php">View All Movies →</a>
       </div>
       <div class="movie-grid">
-        <article class="movie-card">
-          <img src="images/movie1.jpg" alt="Poster for Movie One">
-          <div class="movie-info">
-            <h3>Movie One</h3>
-            <p>Action / Adventure</p>
-            <a href="movie-details.php?id=1" class="ticket-button">Buy Tickets</a>
-          </div>
-        </article>
-        <article class="movie-card">
-          <img src="images/movie2.jpg" alt="Poster for Movie Two">
-          <div class="movie-info">
-            <h3>Movie Two</h3>
-            <p>Comedy / Romance</p>
-            <a href="movie-details.php?id=2" class="ticket-button">Buy Tickets</a>
-          </div>
-        </article>
-        <article class="movie-card">
-          <img src="images/movie3.jpg" alt="Poster for Movie Three">
-          <div class="movie-info">
-            <h3>Movie Three</h3>
-            <p>Drama / Thriller</p>
-            <a href="movie-details.php?id=3" class="ticket-button">Buy Tickets</a>
-          </div>
-        </article>
-        <article class="movie-card">
-          <img src="images/movie4.jpg" alt="Poster for Movie Four">
-          <div class="movie-info">
-            <h3>Movie Four</h3>
-            <p>Animation / Family</p>
-            <a href="movie-details.php?id=4" class="ticket-button">Buy Tickets</a>
-          </div>
-        </article>
+        <?php for ($i = 0; $i < min(gridSize, count($movies)); $i++) { ?>
+          <article class="movie-card">
+            <img src="<?php echo htmlspecialchars($movies[$i]['posterPath']); ?>" alt="Poster for <?php echo htmlspecialchars($movies[$i]['title']); ?>">
+            <div class="movie-info">
+              <h3>
+                <?php echo htmlspecialchars($movies[$i]['title']); ?>
+              </h3>
+              <p><?php echo htmlspecialchars($movies[$i]['genre']); ?></p>
+              <a href="movie-details.php?id=<?php echo htmlspecialchars($movies[$i]['movieId']); ?>" class="ticket-button">Buy Tickets</a>
+            </div>
+          </article>
+        <?php } ?>
       </div>
     </section>
   </main>
@@ -84,7 +86,7 @@
   <footer class="site-footer">
     <p>&copy; 2026 Screendinavia Cinema</p>
   </footer>
-  <script src="carrousel.js"></script>
+  <script src="../javascript/carrousel.js"></script>
 </body>
 
 </html>
