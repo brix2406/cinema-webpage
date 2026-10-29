@@ -243,7 +243,7 @@ button {
 }
 
 
-/* Log-in and sign-in page */
+/* LOG-IN AND SIGN-IN PAGE */
 .login-container {
     max-width: 400px;
     margin: 100px auto;
@@ -298,4 +298,140 @@ button {
 .error {
     color: #ff7777;
     font-size: 14px;
+}
+
+/* BOOKING PAGE */
+.booking-container {
+    display: flex;
+    gap: 24px;
+    max-width: 1150px;
+    margin: 40px auto;
+    padding: 18px;
+    background: linear-gradient(to right, #1a1d24, #121722);
+    border-radius: 20px;
+    color: white;
+}
+
+.booking-poster {
+    width: 34%;
+    flex-shrink: 0;
+}
+
+.booking-poster img {
+    width: 100%;
+    height: 100%;
+    max-height: 560px;
+    object-fit: cover;
+    border-radius: 18px;
+    display: block;
+}
+
+.booking-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.booking-content h1 {
+    font-size: 2.3rem;
+    margin: 0 0 10px 0;
+}
+
+.booking-genre {
+    color: #b4b8c3;
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+}
+
+.booking-content form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.booking-content label {
+    font-size: 1rem;
+    font-weight: 600;
+    color: white;
+}
+
+.booking-content select,
+.booking-content input[type="number"] {
+    background-color: #343946;
+    color: white;
+    border: none;
+    border-radius: 14px;
+    padding: 16px 18px;
+    font-size: 1rem;
+}
+
+.booking-content select {
+    width: 100%;
+}
+
+.booking-content input[type="number"] {
+    width: 120px;
+}
+
+/* SHOWTIME BUTTONS */
+.showtime-buttons {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+.time-option input[type="radio"] {
+    display: none;
+}
+
+.time-button {
+    display: inline-block;
+    background-color: #343946;
+    color: white;
+    padding: 14px 18px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: 0.2s ease;
+}
+
+.time-button:hover {
+    background-color: #434a59;
+}
+
+.time-option input[type="radio"]:checked + .time-button {
+    background-color: #c9252f;
+    color: white;
+}
+
+/* RED BUTTON */
+.red-button {
+    margin-top: 8px;
+    width: 100%;
+    padding: 18px;
+    background-color: #c9252f;
+    color: white;
+    border: none;
+    border-radius: 14px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.red-button:hover {
+    background-color: #dd303c;
+}
+
+/* RESPONSIVE */
+@media (max-width: 850px) {
+    .booking-container {
+        flex-direction: column;
+    }
+
+    .booking-poster {
+        width: 100%;
+        max-width: 320px;
+        margin: 0 auto;
+    }
 }
