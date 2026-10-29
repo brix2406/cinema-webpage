@@ -1,8 +1,6 @@
 <?php
 session_start();
 ?>
-<!DOCTYPE html>
-<html lang="en">
 
 <head>
     <link rel="stylesheet" href="../style.css">
@@ -26,6 +24,3 @@ session_start();
         </div>
     </nav>
 </header>
-</body>
-
-</html>
