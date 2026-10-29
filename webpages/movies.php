@@ -1,5 +1,6 @@
 <?php
 require("../php/db.php");
+include 'header.php';
 $query = "SELECT movieId, title, genre, posterPath FROM movies
           WHERE lastScreening >= CURDATE() ORDER BY lastScreening ASC";
 
@@ -30,19 +31,6 @@ if ($result) {
 </head>
 
 <body>
-  <!-- Navigation bar -->
-  <div id="site-header"></div>
-  <script>
-    fetch('header.html')
-      .then(response => {
-        if (!response.ok) throw new Error('Network response was not ok');
-        return response.text();
-      })
-      .then(data => {
-        document.getElementById('site-header').innerHTML = data;
-      })
-      .catch(error => console.error('Error loading header:', error));
-  </script>
   <main>
 
     <!-- Movie cards -->

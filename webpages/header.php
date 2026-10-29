@@ -13,8 +13,8 @@ session_start();
     <nav class="navbar">
         <img src="../media/logo.png" id="logo" alt="Screendinavia" width="auto" height="60px">
         <div class="nav-links">
-            <a href="index.php">Home</a>
-            <a href="../html/movies.html">Movies</a>
+            <a href="../webpages/index.php">Home</a>
+            <a href="../webpages/movies.php">Movies</a>
             <?php if (isset($_SESSION["userId"])): ?>
                 <a href="../php/logout.php">Logout</a>
             <?php else: ?>

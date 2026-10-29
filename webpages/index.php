@@ -1,5 +1,6 @@
 <?php
 session_start();
+include 'header.php';
 define('gridSize', 4);
 require("../php/db.php");
 $query = "SELECT movieId, title, genre, posterPath FROM movies
@@ -34,18 +35,6 @@ if ($result) {
 
 <body>
   <!-- Navigation bar -->
-  <div id="site-header"></div>
-  <script>
-    fetch('header.php')
-      .then(response => {
-        if (!response.ok) throw new Error('Network response was not ok');
-        return response.text();
-      })
-      .then(data => {
-        document.getElementById('site-header').innerHTML = data;
-      })
-      .catch(error => console.error('Error loading header:', error));
-  </script>
 
   <main>
     <!-- Featured movies: replace the image with your own cinema banner -->

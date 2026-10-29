@@ -5,7 +5,7 @@ require_once 'db.php';
 
 // Only accept POST requests
 if ($_SERVER["REQUEST_METHOD"] !== "POST") {
-    header("Location: ../html/login.html");
+    header("Location: ../webpages/loginPage.php");
     exit;
 }
 
@@ -19,7 +19,7 @@ if (
     $password === ""
 ) {
 
-    header("Location: ../html/login.html?error=invalid");
+    header("Location: ../webpages/loginPage.php?error=invalid");
     exit;
 }
 
@@ -40,13 +40,13 @@ try {
 
     // Check whether email exists
     if (!$user) {
-        header("Location: ../html/login.html?error=not_found");
+        header("Location: ../webpages/loginPage.php?error=not_found");
         exit;
     }
 
     // Verify password against stored hash
     if (!password_verify($password, $user["password"])) {
-        header("Location: ../html/login.html?error=incorrect_password");
+        header("Location: ../webpages/loginPage.php?error=incorrect_password");
         exit;
     }
 
@@ -65,7 +65,7 @@ try {
 
     error_log($e->getMessage());
 
-    header("Location: ../html/login.html?error=server");
+    header("Location: ../webpages/loginPage.php?error=server");
     exit;
 }
 ?>

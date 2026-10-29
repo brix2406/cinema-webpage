@@ -13,7 +13,7 @@
   <!-- Navigation bar -->
   <div id="site-header"></div>
   <script>
-    fetch('header.html')
+    fetch('header.php')
       .then(response => {
         if (!response.ok) throw new Error('Network response was not ok');
         return response.text();
@@ -23,31 +23,24 @@
       })
       .catch(error => console.error('Error loading header:', error));
   </script>
-
   <div class="login-container">
 
-    <!-- SIGN UP -->
-    <div id="sign-up">
-      <h1>Create Account</h1>
+    <!-- SIGN IN -->
+    <div id="sign-in">
+      <h1>Login</h1>
 
-      <form action="register.php" method="POST" id="signup-form">
+      <form action="login.php" method="POST">
+        <label for="login-email">E-mail</label>
+        <input type="email" id="login-email" name="email" required>
 
-        <label for="signup-email">Email</label>
-        <input type="email" id="signup-email" name="email" required>
+        <label for="login-password">Password</label>
+        <input type="password" id="login-password" name="password" required>
 
-        <label for="signup-password">Password</label>
-        <input type="password" id="signup-password" name="password" minlength="8" required>
-
-        <label for="confirm-password">
-          Confirm Password
-        </label>
-        <input type="password" id="confirm-password" name="confirm_password" minlength="8" required>
-
-        <button type="submit">Sign Up</button>
+        <button type="submit">Login</button>
       </form>
 
-      <p>Already have an account?
-        <a href="login.html">Login</a>
+      <p>Don't have an account?
+        <a href="signupPage.php">Sign Up</a>
       </p>
     </div>
 

@@ -1,10 +1,9 @@
-
 <?php
 require_once 'db.php';
 
 // Only accept POST requests
 if ($_SERVER["REQUEST_METHOD"] !== "POST") {
-    header("Location: ../html/signup.html");
+    header("Location: ../webpages/signupPage.php");
     exit;
 }
 
@@ -32,10 +31,10 @@ try {
 
     $result = $stmt->get_result();
 
-if ($result->num_rows > 0) {
-    header("Location: ../html/signup.html?error=email_exists");
-    exit;
-}
+    if ($result->num_rows > 0) {
+        header("Location: ../webpages/signupPage.php?error=email_exists");
+        exit;
+    }
 
     $stmt->close();
 
@@ -61,7 +60,7 @@ if ($result->num_rows > 0) {
     $stmt->close();
 
     // Redirect after successful registration
-    header("Location: ../html/login.html?registered=success");
+    header("Location: ../webpages/loginPage.php?registered=success");
     exit;
 
 } catch (mysqli_sql_exception $e) {
