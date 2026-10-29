@@ -13,6 +13,7 @@ if (session_status() === PHP_SESSION_NONE) {
             <a href="../webpages/index.php">Home</a>
             <a href="../webpages/movies.php">Movies</a>
             <?php if (isset($_SESSION["userId"])): ?>
+                <a href="../webpages/myBookings.php">My Bookings</a>
                 <a href="../php/logout.php">Logout</a>
             <?php else: ?>
                 <a href="../php/login.php">Login</a>
