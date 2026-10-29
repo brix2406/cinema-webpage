@@ -34,12 +34,6 @@ button {
     gap: 24px;
 }
 
-.logo {
-    font-size: 22px;
-    font-weight: 800;
-    letter-spacing: 1px;
-}
-
 .nav-links {
     display: flex;
     align-items: center;

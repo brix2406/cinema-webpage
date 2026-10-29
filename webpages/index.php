@@ -1,4 +1,5 @@
 <?php
+session_start();
 define('gridSize', 4);
 require("../php/db.php");
 $query = "SELECT movieId, title, genre, posterPath FROM movies
@@ -35,7 +36,7 @@ if ($result) {
   <!-- Navigation bar -->
   <div id="site-header"></div>
   <script>
-    fetch('header.html')
+    fetch('header.php')
       .then(response => {
         if (!response.ok) throw new Error('Network response was not ok');
         return response.text();
@@ -69,13 +70,15 @@ if ($result) {
       <div class="movie-grid">
         <?php for ($i = 0; $i < min(gridSize, count($movies)); $i++) { ?>
           <article class="movie-card">
-            <img src="<?php echo htmlspecialchars($movies[$i]['posterPath']); ?>" alt="Poster for <?php echo htmlspecialchars($movies[$i]['title']); ?>">
+            <img src="<?php echo htmlspecialchars($movies[$i]['posterPath']); ?>"
+              alt="Poster for <?php echo htmlspecialchars($movies[$i]['title']); ?>">
             <div class="movie-info">
               <h3>
                 <?php echo htmlspecialchars($movies[$i]['title']); ?>
               </h3>
               <p><?php echo htmlspecialchars($movies[$i]['genre']); ?></p>
-              <a href="movie-details.php?id=<?php echo htmlspecialchars($movies[$i]['movieId']); ?>" class="ticket-button">Buy Tickets</a>
+              <a href="movie-details.php?id=<?php echo htmlspecialchars($movies[$i]['movieId']); ?>"
+                class="ticket-button">Buy Tickets</a>
             </div>
           </article>
         <?php } ?>
