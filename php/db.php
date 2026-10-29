@@ -39,9 +39,11 @@ $queries = [
     )",
     "CREATE TABLE IF NOT EXISTS screenings (
         screeningId INT AUTO_INCREMENT PRIMARY KEY,
+        roomId INT,
         movieId INT,
         startDate DATE,
         startTime TIME,
+        FOREIGN KEY (roomId) REFERENCES screeningRooms(roomId) ON DELETE CASCADE,
         FOREIGN KEY (movieId) REFERENCES movies(movieId) ON DELETE CASCADE
     )",
     "CREATE TABLE IF NOT EXISTS bookings (
@@ -103,7 +105,16 @@ if ($screeningsCheck) {
     $screeningsRow = $screeningsCheck->fetch_assoc();
     if ((int) $screeningsRow['total'] === 0) {
         $moviesResult = $db->query("SELECT movieId FROM movies");
-        if ($moviesResult && $moviesResult->num_rows > 0) {
+        $roomsResult = $db->query("SELECT roomId FROM screeningRooms");
+
+        $roomIds = [];
+        if ($roomsResult) {
+            while ($room = $roomsResult->fetch_assoc()) {
+                $roomIds[] = (int) $room['roomId'];
+            }
+        }
+
+        if ($moviesResult && $moviesResult->num_rows > 0 && !empty($roomIds)) {
             $timeSlots = [];
             for ($hour = 10; $hour <= 21; $hour++) {
                 foreach (['00', '15', '30', '45'] as $min) {
@@ -113,7 +124,7 @@ if ($screeningsCheck) {
             $timeSlots[] = '22:00:00';
 
             $year = date('Y');
-            $stmt = $db->prepare("INSERT INTO screenings (movieId, startDate, startTime) VALUES (?, ?, ?)");
+            $stmt = $db->prepare("INSERT INTO screenings (roomId, movieId, startDate, startTime) VALUES (?, ?, ?, ?)");
 
             while ($movie = $moviesResult->fetch_assoc()) {
                 $movieId = (int) $movie['movieId'];
@@ -121,8 +132,9 @@ if ($screeningsCheck) {
                     $day = rand(1, 10);
                     $startDate = sprintf('%s-11-%02d', $year, $day);
                     $startTime = $timeSlots[array_rand($timeSlots)];
+                    $roomId = $roomIds[array_rand($roomIds)];
 
-                    $stmt->bind_param("iss", $movieId, $startDate, $startTime);
+                    $stmt->bind_param("iiss", $roomId, $movieId, $startDate, $startTime);
                     $stmt->execute();
                 }
             }

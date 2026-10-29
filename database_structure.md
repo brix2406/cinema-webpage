@@ -18,6 +18,7 @@
     - noOfSeats – type=int
 ### screenings
     - screeningId – type=int AUTO-INCREMENT (PRIMARY KEY)
+    - roomId – type=int (foreign key referencing screeningrooms.roomId)
     - movieId – type=int (foreign key referencing movies.movieId)
     - startDate – type=date
     - startTime – type=time
