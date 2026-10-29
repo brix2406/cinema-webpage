@@ -1,6 +1,7 @@
 <?php
-session_start();
-include 'header.php';
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 define('gridSize', 4);
 require("../php/db.php");
 $query = "SELECT movieId, title, genre, posterPath FROM movies
@@ -35,6 +36,7 @@ if ($result) {
 
 <body>
   <!-- Navigation bar -->
+  <?php include 'header.php'; ?>
 
   <main>
     <!-- Featured movies: replace the image with your own cinema banner -->
