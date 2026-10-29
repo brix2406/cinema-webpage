@@ -9,7 +9,9 @@ session_start();
 
 <header class="site-header">
     <nav class="navbar">
-        <img src="../media/logo.png" id="logo" alt="Screendinavia" width="auto" height="60px">
+        <a href="../webpages/index.php">
+            <img src="../media/logo.png" id="logo" alt="Screendinavia" width="auto" height="55px">
+        </a>
         <div class="nav-links">
             <a href="../webpages/index.php">Home</a>
             <a href="../webpages/movies.php">Movies</a>
