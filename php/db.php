@@ -9,7 +9,6 @@ $dbname = 'cinema';
 if ($db->connect_errno) {
     exit("Connection failed: " . $db->connect_error);
 }
-$db->query("DROP DATABASE IF EXISTS `$dbname`");
 $db->query("CREATE DATABASE IF NOT EXISTS `$dbname`");
 
 $db->select_db($dbname);
