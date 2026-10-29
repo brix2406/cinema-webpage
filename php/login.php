@@ -1,4 +1,3 @@
-
 <?php
 session_start();
 
@@ -15,8 +14,10 @@ $email = trim($_POST["email"] ?? "");
 $password = $_POST["password"] ?? "";
 
 // Validate input
-if (!filter_var($email, FILTER_VALIDATE_EMAIL) ||
-    $password === "") {
+if (
+    !filter_var($email, FILTER_VALIDATE_EMAIL) ||
+    $password === ""
+) {
 
     header("Location: ../html/login.html?error=invalid");
     exit;
@@ -57,7 +58,7 @@ try {
     $_SESSION["email"] = $user["email"];
 
     // Redirect after successful login
-    header("Location: ../php/index.php?login=success");
+    header("Location: ../webpages/index.php?login=success");
     exit;
 
 } catch (mysqli_sql_exception $e) {
