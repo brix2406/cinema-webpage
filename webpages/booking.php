@@ -6,14 +6,15 @@ require_once("../php/db.php");
 
 // Get movieId from URL (support both ?movieId= and ?id=)
 $movieId = filter_input(INPUT_GET, 'movieId', FILTER_VALIDATE_INT) ?: filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
-
 if (!$movieId) {
     header("Location: movies.php");
     exit;
 }
+$page = 'booking.php?movieId=' . $movieId;
+$_SESSION['page'] = $page;
 
 // Get movie info
-$sql = "SELECT movieId, title, genre, posterPath
+$sql = "SELECT movieId, title, genre, description, posterPath
         FROM movies
         WHERE movieId = ?";
 
@@ -82,6 +83,9 @@ $result->close();
             <div class="booking-content">
                 <h1><?php echo htmlspecialchars($movie['title']); ?></h1>
                 <p class="booking-genre"><?php echo htmlspecialchars($movie['genre']); ?></p>
+                <?php if (!empty($movie['description'])): ?>
+                    <p class="booking-description"><?php echo htmlspecialchars($movie['description']); ?></p>
+                <?php endif; ?>
 
                 <?php if (empty($screenings)): ?>
                     <p style="color: #b4b8c3; font-size: 1.1rem; margin-top: 10px;">

@@ -340,7 +340,14 @@ button {
 .booking-genre {
     color: #b4b8c3;
     font-size: 1.1rem;
-    margin-bottom: 20px;
+    margin-bottom: 8px;
+}
+
+.booking-description {
+    color: #c5c9d3;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin: 0 0 20px 0;
 }
 
 .booking-content form {
