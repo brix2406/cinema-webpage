@@ -74,6 +74,7 @@ $stmt->close();
                         <tr>
                             <th colspan="2">Movie</th>
                             <th>Tickets</th>
+                            <th></th>
                         </tr>
                     </thead>
 
@@ -120,6 +121,16 @@ $stmt->close();
                             <td class="tickets-cell">
                                 <?php echo (int)$item["noOfTickets"]; ?>
                                 <?php echo ((int)$item["noOfTickets"] === 1) ? 'ticket' : 'tickets'; ?>
+                            </td>
+
+                            <!-- Delete Button -->
+                            <td class="delete-cell">
+                                <form action="../php/delete_booking.php" method="POST" onsubmit="return confirm('Are you sure you want to cancel this booking?');">
+                                    <input type="hidden" name="bookingId" value="<?php echo (int)$item['bookingId']; ?>">
+                                    <button type="submit" class="delete-button" title="Cancel booking" aria-label="Cancel booking">
+                                        <i class="fa fa-trash" aria-hidden="true"></i>
+                                    </button>
+                                </form>
                             </td>
                         </tr>
 

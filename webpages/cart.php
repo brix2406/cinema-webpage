@@ -1,4 +1,3 @@
-
 <?php
 session_start();
 require_once '../php/db.php';
@@ -26,7 +25,7 @@ if ($isLoggedIn) {
 
     foreach ($cart as $index => $booking) {
 
-        $screeningId = (int)$booking["screeningId"];
+        $screeningId = (int) $booking["screeningId"];
 
         $stmt->bind_param("i", $screeningId);
         $stmt->execute();
@@ -35,6 +34,7 @@ if ($isLoggedIn) {
 
         if ($movie) {
             $cartItems[] = [
+                "cartIndex" => $index,
                 "title" => $movie["title"],
                 "posterPath" => $movie["posterPath"],
                 "startDate" => $movie["startDate"],
@@ -60,8 +60,7 @@ if ($isLoggedIn) {
     <title>Shopping Cart - Screendinavia</title>
 
     <link rel="stylesheet" href="../style.css">
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
@@ -92,7 +91,7 @@ if ($isLoggedIn) {
 
                 </div>
 
-            <!-- User IS logged in -->
+                <!-- User IS logged in -->
             <?php else: ?>
 
                 <?php if (empty($cartItems)): ?>
@@ -108,6 +107,7 @@ if ($isLoggedIn) {
                             <tr>
                                 <th colspan="2">Movie</th>
                                 <th>Tickets</th>
+                                <th></th>
                             </tr>
                         </thead>
 
@@ -119,9 +119,7 @@ if ($isLoggedIn) {
 
                                     <!-- Movie Poster -->
                                     <td class="poster-cell">
-                                        <img
-                                            src="<?php echo htmlspecialchars($item['posterPath']); ?>"
-                                            alt="Movie Poster">
+                                        <img src="<?php echo htmlspecialchars($item['posterPath']); ?>" alt="Movie Poster">
                                     </td>
 
                                     <!-- Movie Information -->
@@ -151,8 +149,18 @@ if ($isLoggedIn) {
 
                                     <!-- Number of Tickets -->
                                     <td class="tickets-cell">
-                                        <?php echo (int)$item["noOfTickets"]; ?>
+                                        <?php echo (int) $item["noOfTickets"]; ?>
                                         tickets
+                                    </td>
+
+                                    <!-- Delete Button -->
+                                    <td class="delete-cell">
+                                        <form action="../php/delete_from_cart.php" method="POST" onsubmit="return confirm('Remove this movie from your cart?');">
+                                            <input type="hidden" name="cartIndex" value="<?php echo (int) $item['cartIndex']; ?>">
+                                            <button type="submit" class="delete-button" title="Remove item" aria-label="Remove item">
+                                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                            </button>
+                                        </form>
                                     </td>
 
                                 </tr>
@@ -173,8 +181,8 @@ if ($isLoggedIn) {
 
                     <?php if (!empty($cartItems)): ?>
 
-                        <a href="payment.php" class="cart-payment-button">
-                            Proceed to Payment
+                        <a href="../php/add_booking.php" class="cart-payment-button">
+                            Confirm Booking
                         </a>
 
                     <?php endif; ?>
@@ -191,5 +199,5 @@ if ($isLoggedIn) {
     </footer>
 
 </body>
-</html>
 
+</html>
