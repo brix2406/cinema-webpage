@@ -18,7 +18,7 @@
     <div id="sign-in">
       <h1>Login</h1>
 
-      <form action="login.php" method="POST">
+      <form action="../php/login.php" method="POST">
         <label for="login-email">E-mail</label>
         <input type="email" id="login-email" name="email" required>
 
