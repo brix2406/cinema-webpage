@@ -435,3 +435,122 @@ button {
         margin: 0 auto;
     }
 }
+
+
+/* SHOPPING CART */
+
+.cart-container {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 25px;
+    background-color: #191b20;
+    border-radius: 18px;
+    color: white;
+}
+
+.cart-container h1 {
+    margin-bottom: 25px;
+}
+
+/* Table */
+.cart-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 15px;
+}
+
+.cart-table th {
+    text-align: left;
+    padding: 10px 15px;
+    color: #aaa;
+}
+
+.cart-table td {
+    background-color: #30343c;
+    padding: 15px;
+    vertical-align: middle;
+}
+
+.cart-table td:first-child {
+    border-radius: 12px 0 0 12px;
+}
+
+.cart-table td:last-child {
+    border-radius: 0 12px 12px 0;
+}
+
+/* Poster */
+.poster-cell {
+    width: 100px;
+}
+
+.poster-cell img {
+    width: 70px;
+    border-radius: 6px;
+    display: block;
+}
+
+/* Movie */
+.movie-cell h3 {
+    margin: 0 0 10px;
+}
+
+.movie-cell p {
+    color: #bbb;
+    margin: 5px 0;
+}
+
+/* Tickets */
+.tickets-cell {
+    width: 150px;
+    text-align: left;
+}
+
+/* Bottom buttons */
+.cart-actions {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.cart-actions a {
+    flex: 1;
+    padding: 16px;
+    border-radius: 10px;
+    text-align: center;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.cart-payment-button {
+    background-color: #c42731;
+    color: white;
+}
+
+.cart-payment-button:hover {
+    background-color: #e03340;
+}
+
+.more-tickets-button {
+    background-color: #30343c;
+    color: white;
+}
+
+.more-tickets-button:hover {
+    background-color: #40454f;
+}
+
+@media (max-width: 650px) {
+    .cart-container {
+        margin: 20px 10px;
+        overflow-x: auto;
+    }
+
+    .cart-table {
+        min-width: 500px;
+    }
+
+    .cart-actions {
+        flex-direction: column;
+    }
+}
