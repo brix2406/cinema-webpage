@@ -44,13 +44,12 @@ if ($result) {
       <div class="movie-grid">
         <?php for ($i = 0; $i < count($movies); $i++) { ?>
           <article class="movie-card">
-            <img src="<?php echo htmlspecialchars($movies[$i]['posterPath']); ?>"
-              alt="Poster for <?php echo htmlspecialchars($movies[$i]['title']); ?>">
+            <img src="<?php echo $movies[$i]['posterPath']; ?>" alt="Poster for <?php echo $movies[$i]['title']; ?>">
             <div class="movie-info">
               <h3>
-                <?php echo htmlspecialchars($movies[$i]['title']); ?>
+                <?php echo $movies[$i]['title']; ?>
               </h3>
-              <p><?php echo htmlspecialchars($movies[$i]['genre']); ?></p>
+              <p><?php echo $movies[$i]['genre']; ?></p>
               <a href="booking.php?movieId=<?php echo (int) $movies[$i]['movieId']; ?>" class="ticket-button">
                 Buy Tickets
               </a>

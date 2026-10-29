@@ -115,13 +115,13 @@ if ($isLoggedIn) {
                                 <tr>
 
                                     <td class="poster-cell">
-                                        <img src="<?php echo htmlspecialchars($item['posterPath']); ?>" alt="Movie Poster">
+                                        <img src="<?php echo ($item['posterPath']); ?>" alt="Movie Poster">
                                     </td>
 
                                     <td class="movie-cell">
 
                                         <h3>
-                                            <?php echo htmlspecialchars($item['title']); ?>
+                                            <?php echo ($item['title']); ?>
                                         </h3>
 
                                         <p>

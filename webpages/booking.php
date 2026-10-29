@@ -60,7 +60,7 @@ $result->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Booking - <?php echo htmlspecialchars($movie['title']); ?> - Screendinavia</title>
+    <title>Booking - <?php echo ($movie['title']); ?> - Screendinavia</title>
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="../javascript/booking.js" defer></script>
@@ -74,15 +74,14 @@ $result->close();
         <section class="booking-container">
 
             <div class="booking-poster">
-                <img src="<?php echo htmlspecialchars($movie['posterPath']); ?>"
-                    alt="Poster for <?php echo htmlspecialchars($movie['title']); ?>">
+                <img src="<?php echo ($movie['posterPath']); ?>" alt="Poster for <?php echo ($movie['title']); ?>">
             </div>
 
             <div class="booking-content">
-                <h1><?php echo htmlspecialchars($movie['title']); ?></h1>
-                <p class="booking-genre"><?php echo htmlspecialchars($movie['genre']); ?></p>
+                <h1><?php echo ($movie['title']); ?></h1>
+                <p class="booking-genre"><?php echo ($movie['genre']); ?></p>
                 <?php if (!empty($movie['description'])): ?>
-                    <p class="booking-description"><?php echo htmlspecialchars($movie['description']); ?></p>
+                    <p class="booking-description"><?php echo ($movie['description']); ?></p>
                 <?php endif; ?>
 
                 <?php if (empty($screenings)): ?>
@@ -104,8 +103,8 @@ $result->close();
                         <select id="booking-date" name="selectedDate" required>
                             <option value="">Choose date</option>
                             <?php foreach ($dates as $date): ?>
-                                <option value="<?php echo htmlspecialchars($date); ?>">
-                                    <?php echo htmlspecialchars(date("M j, Y", strtotime($date))); ?>
+                                <option value="<?php echo ($date); ?>">
+                                    <?php echo (date("M j, Y", strtotime($date))); ?>
                                 </option>
                             <?php endforeach; ?>
                         </select>
@@ -115,11 +114,11 @@ $result->close();
                             select a date above to view showtimes.</p>
                         <div class="showtime-buttons">
                             <?php foreach ($screenings as $screening): ?>
-                                <div class="time-option" data-date="<?php echo htmlspecialchars($screening['startDate']); ?>">
+                                <div class="time-option" data-date="<?php echo ($screening['startDate']); ?>">
                                     <input type="radio" id="time-<?php echo (int) $screening['screeningId']; ?>"
                                         name="selectedTime" value="<?php echo (int) $screening['screeningId']; ?>">
                                     <label for="time-<?php echo (int) $screening['screeningId']; ?>" class="time-button">
-                                        <?php echo htmlspecialchars(date("H:i", strtotime($screening['startTime']))); ?>
+                                        <?php echo (date("H:i", strtotime($screening['startTime']))); ?>
                                     </label>
                                 </div>
                             <?php endforeach; ?>
