@@ -1,6 +1,7 @@
-
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 require_once '../php/db.php';
 
 // User must be logged in
@@ -27,7 +28,7 @@ $stmt = $db->prepare($sql);
 
 foreach ($cart as $index => $booking) {
 
-    $screeningId = (int)$booking["screeningId"];
+    $screeningId = (int) $booking["screeningId"];
 
     $stmt->bind_param("i", $screeningId);
     $stmt->execute();
@@ -53,12 +54,10 @@ $stmt->close();
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shopping Cart - Screendinavia</title>
     <link rel="stylesheet" href="../style.css">
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
@@ -86,47 +85,45 @@ $stmt->close();
 
                     <tbody>
 
-                    <?php foreach ($cartItems as $item): ?>
+                        <?php foreach ($cartItems as $item): ?>
 
-                        <tr>
-                            <!-- Movie Poster -->
-                            <td class="poster-cell">
-                                <img
-                                    src="<?php echo htmlspecialchars($item['posterPath']); ?>"
-                                    alt="Movie Poster">
-                            </td>
+                            <tr>
+                                <!-- Movie Poster -->
+                                <td class="poster-cell">
+                                    <img src="<?php echo htmlspecialchars($item['posterPath']); ?>" alt="Movie Poster">
+                                </td>
 
-                            <!-- Movie Information -->
-                            <td class="movie-cell">
-                                <h3>
-                                    <?php echo htmlspecialchars($item['title']); ?>
-                                </h3>
+                                <!-- Movie Information -->
+                                <td class="movie-cell">
+                                    <h3>
+                                        <?php echo htmlspecialchars($item['title']); ?>
+                                    </h3>
 
-                                <p>
-                                    <?php
-                                    echo date(
-                                        "M j, Y",
-                                        strtotime($item["startDate"])
-                                    );
-                                    ?>
-                                    -
-                                    <?php
-                                    echo date(
-                                        "H:i",
-                                        strtotime($item["startTime"])
-                                    );
-                                    ?>
-                                </p>
-                            </td>
+                                    <p>
+                                        <?php
+                                        echo date(
+                                            "M j, Y",
+                                            strtotime($item["startDate"])
+                                        );
+                                        ?>
+                                        -
+                                        <?php
+                                        echo date(
+                                            "H:i",
+                                            strtotime($item["startTime"])
+                                        );
+                                        ?>
+                                    </p>
+                                </td>
 
-                            <!-- Number of Tickets -->
-                            <td class="tickets-cell">
-                                <?php echo (int)$item["noOfTickets"]; ?>
-                                tickets
-                            </td>
-                        </tr>
+                                <!-- Number of Tickets -->
+                                <td class="tickets-cell">
+                                    <?php echo (int) $item["noOfTickets"]; ?>
+                                    tickets
+                                </td>
+                            </tr>
 
-                    <?php endforeach; ?>
+                        <?php endforeach; ?>
 
                     </tbody>
                 </table>
@@ -136,15 +133,13 @@ $stmt->close();
             <!-- Cart Buttons -->
             <div class="cart-actions">
 
-                <a href="movies.php"
-                   class="more-tickets-button">
+                <a href="movies.php" class="more-tickets-button">
                     Purchase More Tickets
                 </a>
 
                 <?php if (!empty($cartItems)): ?>
 
-                    <a href="payment.php"
-                       class="cart-payment-button">
+                    <a href="../php/addBooking.php" class="cart-payment-button">
                         Proceed to Payment
                     </a>
 
@@ -160,4 +155,5 @@ $stmt->close();
     </footer>
 
 </body>
+
 </html>

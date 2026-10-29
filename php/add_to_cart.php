@@ -1,25 +1,33 @@
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 require_once 'db.php';
 
 // Create empty cart if needed
 if (!isset($_SESSION["cart"])) {
     $_SESSION["cart"] = [];
 }
-
+$_SESSION['page'] = "add_to_cart.php";
 // Handle submitted booking
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     $screeningId = filter_input(
-        INPUT_POST, "screeningId", FILTER_VALIDATE_INT
+        INPUT_POST,
+        "screeningId",
+        FILTER_VALIDATE_INT
     );
 
     $noOfTickets = filter_input(
-        INPUT_POST, "noOfTickets", FILTER_VALIDATE_INT
+        INPUT_POST,
+        "noOfTickets",
+        FILTER_VALIDATE_INT
     );
 
-    if (!$screeningId || !$noOfTickets ||
-        $noOfTickets < 1 || $noOfTickets > 10) {
+    if (
+        !$screeningId || !$noOfTickets ||
+        $noOfTickets < 1 || $noOfTickets > 10
+    ) {
         die("Invalid booking information.");
     }
 
@@ -46,8 +54,10 @@ if (!isset($_SESSION["userId"])) {
 }
 
 // Add pending booking after login or POST
-if (isset($_SESSION["pendingBooking"]) &&
-    isset($_GET["resume"])) {
+if (
+    isset($_SESSION["pendingBooking"]) &&
+    isset($_GET["resume"])
+) {
 
     $booking = $_SESSION["pendingBooking"];
 
@@ -78,43 +88,4 @@ if (isset($_SESSION["pendingBooking"]) &&
     header("Location: ../webpages/shoppingcart.php");
     exit;
 }
-
-// Remove booking from cart
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    // Handled below in a later step
-}
-
-// Get cart details from database
-$cartItems = [];
-
-$sql = "SELECT
-            m.title,
-            m.posterPath,
-            s.startDate,
-            s.startTime
-        FROM screenings s
-        JOIN movies m ON s.movieId = m.movieId
-        WHERE s.screeningId = ?";
-
-$stmt = $db->prepare($sql);
-
-foreach ($_SESSION["cart"] as $index => $booking) {
-    $stmt->bind_param("i", $booking["screeningId"]);
-    $stmt->execute();
-
-    $movie = $stmt->get_result()->fetch_assoc();
-
-    if ($movie) {
-        $cartItems[] = [
-            "index" => $index,
-            "title" => $movie["title"],
-            "posterPath" => $movie["posterPath"],
-            "startDate" => $movie["startDate"],
-            "startTime" => $movie["startTime"],
-            "noOfTickets" => $booking["noOfTickets"]
-        ];
-    }
-}
-
-$stmt->close();
 ?>
