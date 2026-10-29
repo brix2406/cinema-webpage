@@ -20,6 +20,8 @@
       <h1>Create Account</h1>
 
       <form action="../php/register.php" method="POST" id="signup-form">
+        <label for="signup-name">Name</label>
+        <input type="text" id="signup-name" name="name" required>
 
         <label for="signup-email">Email</label>
         <input type="email" id="signup-email" name="email" required>
