@@ -39,7 +39,7 @@ if ($result) {
   <main>
     <!-- Featured movies: replace the image with your own cinema banner -->
     <section class="hero" aria-label="Featured movies">
-      <img id="hero-image" src="../media/moviePosters/by_any_means.jpeg" alt="Featured movie banner">
+      <img id="hero-image" src="../media/cinemaPicture1.jpg" alt="Featured movie banner">
       <div class="hero-overlay">
         <p>WELCOME TO SCREENDINAVIA</p>
         <h1 id="hero-title">Experience movies on the big screen</h1>
