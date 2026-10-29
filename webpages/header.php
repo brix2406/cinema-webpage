@@ -17,7 +17,7 @@ if (session_status() === PHP_SESSION_NONE) {
             <?php else: ?>
                 <a href="../php/login.php">Login</a>
             <?php endif; ?>
-            <a href="../webpages/shoppingcart.php" class="cart-link" aria-label="Shopping Cart">
+            <a href="../webpages/cart.php" class="cart-link" aria-label="Shopping Cart">
                 <i class="fa fa-shopping-cart" aria-hidden="true"></i>
             </a>
         </div>
