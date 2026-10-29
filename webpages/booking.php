@@ -73,13 +73,11 @@ $result->close();
     <main>
         <section class="booking-container">
 
-            <!-- Poster -->
             <div class="booking-poster">
                 <img src="<?php echo htmlspecialchars($movie['posterPath']); ?>"
                     alt="Poster for <?php echo htmlspecialchars($movie['title']); ?>">
             </div>
 
-            <!-- Content -->
             <div class="booking-content">
                 <h1><?php echo htmlspecialchars($movie['title']); ?></h1>
                 <p class="booking-genre"><?php echo htmlspecialchars($movie['genre']); ?></p>
@@ -99,11 +97,9 @@ $result->close();
                 <?php else: ?>
                     <form id="booking-form" action="../php/add_to_cart.php" method="POST">
 
-                        <!-- hidden fields -->
                         <input type="hidden" name="movieId" value="<?php echo (int) $movie['movieId']; ?>">
                         <input type="hidden" name="screeningId" id="screeningId">
 
-                        <!-- DATE -->
                         <label for="booking-date">Select Date</label>
                         <select id="booking-date" name="selectedDate" required>
                             <option value="">Choose date</option>
@@ -114,7 +110,6 @@ $result->close();
                             <?php endforeach; ?>
                         </select>
 
-                        <!-- TIME -->
                         <label>Select Showtime</label>
                         <p id="select-date-prompt" style="color: #b4b8c3; font-size: 0.95rem; margin: 4px 0 10px 0;">Please
                             select a date above to view showtimes.</p>
@@ -130,7 +125,6 @@ $result->close();
                             <?php endforeach; ?>
                         </div>
 
-                        <!-- TICKETS -->
                         <label for="tickets">Number of Tickets</label>
                         <input type="number" id="tickets" name="noOfTickets" min="1" max="10" value="2" required>
 

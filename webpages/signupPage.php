@@ -10,12 +10,10 @@
 </head>
 
 <body>
-  <!-- Navigation bar -->
   <?php include 'header.php'; ?>
 
   <div class="login-container">
 
-    <!-- SIGN UP -->
     <div id="sign-up">
       <h1>Create Account</h1>
 
@@ -48,13 +46,13 @@
     <p>&copy; 2026 Screendinavia Cinema</p>
   </footer>
 
-    <script>
-      const params = new URLSearchParams(window.location.search);
+  <script>
+    const params = new URLSearchParams(window.location.search);
 
-      if (params.get("error") === "email_exists") {
-        alert("This email is already registered. Please try to login instead.");
-      }
-    </script>
+    if (params.get("error") === "email_exists") {
+      alert("This email is already registered. Please try to login instead.");
+    }
+  </script>
 </body>
 
 </html>

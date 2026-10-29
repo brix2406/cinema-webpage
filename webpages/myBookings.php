@@ -13,7 +13,7 @@ if (!isset($_SESSION["userId"])) {
 
 $_SESSION['page'] = 'myBookings.php';
 
-$userId = (int)$_SESSION["userId"];
+$userId = (int) $_SESSION["userId"];
 
 // Fetch user's bookings from database
 $sql = "SELECT
@@ -46,12 +46,10 @@ $stmt->close();
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Bookings - Screendinavia</title>
     <link rel="stylesheet" href="../style.css">
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
@@ -80,61 +78,57 @@ $stmt->close();
 
                     <tbody>
 
-                    <?php foreach ($bookings as $item): ?>
+                        <?php foreach ($bookings as $item): ?>
 
-                        <tr>
-                            <!-- Movie Poster -->
-                            <td class="poster-cell">
-                                <img
-                                    src="<?php echo htmlspecialchars($item['posterPath']); ?>"
-                                    alt="Movie Poster">
-                            </td>
+                            <tr>
+                                <td class="poster-cell">
+                                    <img src="<?php echo htmlspecialchars($item['posterPath']); ?>" alt="Movie Poster">
+                                </td>
 
-                            <!-- Movie Information -->
-                            <td class="movie-cell">
-                                <h3>
-                                    <?php echo htmlspecialchars($item['title']); ?>
-                                </h3>
+                                <td class="movie-cell">
+                                    <h3>
+                                        <?php echo htmlspecialchars($item['title']); ?>
+                                    </h3>
 
-                                <p>
-                                    <?php
-                                    echo date(
-                                        "M j, Y",
-                                        strtotime($item["startDate"])
-                                    );
-                                    ?>
-                                    -
-                                    <?php
-                                    echo date(
-                                        "H:i",
-                                        strtotime($item["startTime"])
-                                    );
-                                    ?>
-                                </p>
+                                    <p>
+                                        <?php
+                                        echo date(
+                                            "M j, Y",
+                                            strtotime($item["startDate"])
+                                        );
+                                        ?>
+                                        -
+                                        <?php
+                                        echo date(
+                                            "H:i",
+                                            strtotime($item["startTime"])
+                                        );
+                                        ?>
+                                    </p>
 
-                                <p class="booking-ref">
-                                    Booking #<?php echo htmlspecialchars($item['bookingId']); ?>
-                                </p>
-                            </td>
+                                    <p class="booking-ref">
+                                        Booking #<?php echo htmlspecialchars($item['bookingId']); ?>
+                                    </p>
+                                </td>
 
-                            <!-- Number of Tickets -->
-                            <td class="tickets-cell">
-                                <?php echo (int)$item["noOfTickets"]; ?>
-                                <?php echo ((int)$item["noOfTickets"] === 1) ? 'ticket' : 'tickets'; ?>
-                            </td>
+                                <td class="tickets-cell">
+                                    <?php echo (int) $item["noOfTickets"]; ?>
+                                    <?php echo ((int) $item["noOfTickets"] === 1) ? 'ticket' : 'tickets'; ?>
+                                </td>
 
-                            <!-- Delete Button -->
-                            <td class="delete-cell">
-                                <form action="../php/delete_booking.php" method="POST" onsubmit="return confirm('Are you sure you want to cancel this booking?');">
-                                    <input type="hidden" name="bookingId" value="<?php echo (int)$item['bookingId']; ?>">
-                                    <button type="submit" class="delete-button" title="Cancel booking" aria-label="Cancel booking">
-                                        <i class="fa fa-trash" aria-hidden="true"></i>
-                                    </button>
-                                </form>
-                            </td>
-                        </tr>
+                                <td class="delete-cell">
+                                    <form action="../php/delete_booking.php" method="POST"
+                                        onsubmit="return confirm('Are you sure you want to cancel this booking?');">
+                                        <input type="hidden" name="bookingId" value="<?php echo (int) $item['bookingId']; ?>">
+                                        <button type="submit" class="delete-button" title="Cancel booking"
+                                            aria-label="Cancel booking">
+                                            <i class="fa fa-trash" aria-hidden="true"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
 
-                    <?php endforeach; ?>
+                        <?php endforeach; ?>
 
                     </tbody>
                 </table>
@@ -143,8 +137,7 @@ $stmt->close();
 
             <!-- Action Buttons -->
             <div class="cart-actions">
-                <a href="movies.php"
-                   class="more-tickets-button">
+                <a href="movies.php" class="more-tickets-button">
                     Book More Tickets
                 </a>
             </div>
@@ -157,4 +150,5 @@ $stmt->close();
     </footer>
 
 </body>
+
 </html>

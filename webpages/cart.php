@@ -72,7 +72,6 @@ if ($isLoggedIn) {
 
             <h1>Your Cart</h1>
 
-            <!-- User is NOT logged in -->
             <?php if (!$isLoggedIn): ?>
 
                 <div class="cart-login-message">
@@ -91,7 +90,6 @@ if ($isLoggedIn) {
 
                 </div>
 
-                <!-- User IS logged in -->
             <?php else: ?>
 
                 <?php if (empty($cartItems)): ?>
@@ -100,7 +98,6 @@ if ($isLoggedIn) {
 
                 <?php else: ?>
 
-                    <!-- Shopping Cart Table -->
                     <table class="cart-table">
 
                         <thead>
@@ -117,12 +114,10 @@ if ($isLoggedIn) {
 
                                 <tr>
 
-                                    <!-- Movie Poster -->
                                     <td class="poster-cell">
                                         <img src="<?php echo htmlspecialchars($item['posterPath']); ?>" alt="Movie Poster">
                                     </td>
 
-                                    <!-- Movie Information -->
                                     <td class="movie-cell">
 
                                         <h3>
@@ -147,17 +142,17 @@ if ($isLoggedIn) {
 
                                     </td>
 
-                                    <!-- Number of Tickets -->
                                     <td class="tickets-cell">
                                         <?php echo (int) $item["noOfTickets"]; ?>
                                         tickets
                                     </td>
 
-                                    <!-- Delete Button -->
                                     <td class="delete-cell">
-                                        <form action="../php/delete_from_cart.php" method="POST" onsubmit="return confirm('Remove this movie from your cart?');">
+                                        <form action="../php/delete_from_cart.php" method="POST"
+                                            onsubmit="return confirm('Remove this movie from your cart?');">
                                             <input type="hidden" name="cartIndex" value="<?php echo (int) $item['cartIndex']; ?>">
-                                            <button type="submit" class="delete-button" title="Remove item" aria-label="Remove item">
+                                            <button type="submit" class="delete-button" title="Remove item"
+                                                aria-label="Remove item">
                                                 <i class="fa fa-trash" aria-hidden="true"></i>
                                             </button>
                                         </form>
@@ -172,7 +167,6 @@ if ($isLoggedIn) {
 
                 <?php endif; ?>
 
-                <!-- Cart Buttons -->
                 <div class="cart-actions">
 
                     <a href="movies.php" class="more-tickets-button">
