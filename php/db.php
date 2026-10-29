@@ -14,13 +14,15 @@ $db->query("CREATE DATABASE IF NOT EXISTS `$dbname`");
 
 $db->select_db($dbname);
 
+$db->query("DROP TABLE IF EXISTS users");
+
 $moviesTableExisted = $db->query("SHOW TABLES LIKE 'movies'")->num_rows > 0;
 
 $queries = [
     "CREATE TABLE IF NOT EXISTS users (
         userId INT AUTO_INCREMENT PRIMARY KEY,
+        name VARCHAR(255),
         email VARCHAR(255),
-        birthday DATE,
         password VARCHAR(255)
     )",
     "CREATE TABLE IF NOT EXISTS movies (

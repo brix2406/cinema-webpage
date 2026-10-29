@@ -2,8 +2,8 @@
 ## Tables:
 ### users
     - userId – type=int AUTO-INCREMENT (PRIMARY KEY)
+    - name – type=string
     - email – type=string
-    - birthday – type=date
     - password – type=string
 ### movies
     - movieId – type=int AUTO-INCREMENT (PRIMARY KEY)
