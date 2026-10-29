@@ -38,6 +38,26 @@
   <footer class="site-footer">
     <p>&copy; 2026 Screendinavia Cinema</p>
   </footer>
+
+    <script>
+      const params = new URLSearchParams(window.location.search);
+
+      if (params.get("error") === "not_found") {
+        alert("Email does not exist. Please create an account.");
+      }
+
+      if (params.get("error") === "incorrect_password") {
+        alert("Incorrect password. Please try again.");
+      }
+
+      if (params.get("error") === "invalid") {
+        alert("Please enter a valid email and password.");
+      }
+
+      if (params.get("registered") === "success") {
+        alert("Registration successful! You can now log in.");
+      }
+    </script>
 </body>
 
 </html>
