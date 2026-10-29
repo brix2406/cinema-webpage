@@ -8,7 +8,7 @@ require_once 'db.php';
 if (!isset($_SESSION["cart"])) {
     $_SESSION["cart"] = [];
 }
-$_SESSION['page'] = "add_to_cart.php";
+$_SESSION['page'] = "../php/add_to_cart.php";
 // Handle submitted booking
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
@@ -43,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         exit;
     }
 
-    header("Location: add_to_cart.php?resume=1");
+    header("Location: ../php/add_to_cart.php?resume=1");
     exit;
 }
 
