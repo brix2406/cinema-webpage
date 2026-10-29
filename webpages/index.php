@@ -36,11 +36,9 @@ if ($result) {
 </head>
 
 <body>
-  <!-- Navigation bar -->
   <?php include 'header.php'; ?>
 
   <main>
-    <!-- Featured movies: replace the image with your own cinema banner -->
     <section class="hero" aria-label="Featured movies">
       <img id="hero-image" src="../media/cinemaPicture1.jpg" alt="Featured movie banner">
       <div class="hero-overlay">
@@ -53,7 +51,6 @@ if ($result) {
       <button class="hero-arrow next" id="next-slide" type="button" aria-label="Next featured movie">&#10095;</button>
     </section>
 
-    <!-- Movie cards -->
     <section class="now-showing" aria-labelledby="now-showing-title">
       <div class="section-heading">
         <h2 id="now-showing-title">Now Showing</h2>

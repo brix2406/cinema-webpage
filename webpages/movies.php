@@ -37,7 +37,6 @@ if ($result) {
   <?php include 'header.php'; ?>
   <main>
 
-    <!-- Movie cards -->
     <section class="now-showing" aria-labelledby="now-showing-title">
       <div class="section-heading">
         <h2 id="now-showing-title">All Movies</h2>
