@@ -19,7 +19,7 @@
     <div id="sign-up">
       <h1>Create Account</h1>
 
-      <form action="register.php" method="POST" id="signup-form">
+      <form action="../php/register.php" method="POST" id="signup-form">
 
         <label for="signup-email">Email</label>
         <input type="email" id="signup-email" name="email" required>
