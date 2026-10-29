@@ -60,7 +60,12 @@ try {
     $_SESSION["email"] = $user["email"];
 
     // Redirect after successful login
-    header("Location: ../webpages/index.php?login=success");
+
+    $prevPage = $_SESSION['page'];
+    if (!$prevPage) {
+        header("Location: ../webpages/index.php");
+    }
+    header("Location: ../webpages/$prevPage");
     exit;
 
 } catch (mysqli_sql_exception $e) {

@@ -2,6 +2,8 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
+// fetch previous page
+$prevPage = $_SESSION['page'];
 
 // Remove session variables
 $_SESSION = [];
@@ -24,6 +26,9 @@ if (ini_get("session.use_cookies")) {
 session_destroy();
 
 // Redirect to homepage
-header("Location: ../webpages/index.php");
+if (!$prevPage) {
+    header("Location: ../webpages/index.php");
+}
+header("Location: ../webpages/$prevPage");
 exit;
 ?>

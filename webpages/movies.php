@@ -1,7 +1,8 @@
 <?php
 if (session_status() === PHP_SESSION_NONE) {
-    session_start();
+  session_start();
 }
+$_SESSION['page'] = 'movies.php';
 require("../php/db.php");
 $query = "SELECT movieId, title, genre, posterPath FROM movies
           WHERE lastScreening >= CURDATE() ORDER BY lastScreening ASC";
@@ -51,8 +52,8 @@ if ($result) {
                 <?php echo htmlspecialchars($movies[$i]['title']); ?>
               </h3>
               <p><?php echo htmlspecialchars($movies[$i]['genre']); ?></p>
-              <a href="booking.php?movieId=<?php echo (int)$movies[$i]['movieId']; ?>" class="ticket-button">
-                  Buy Tickets
+              <a href="booking.php?movieId=<?php echo (int) $movies[$i]['movieId']; ?>" class="ticket-button">
+                Buy Tickets
               </a>
             </div>
           </article>
