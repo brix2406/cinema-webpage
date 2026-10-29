@@ -4,13 +4,13 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 require_once 'db.php';
 
-// Create empty cart if needed
-if (!isset($_SESSION["cart"])) {
-    $_SESSION["cart"] = [];
-}
-$_SESSION['page'] = "../php/add_to_cart.php";
 // Handle submitted booking
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    // Require login
+    if (!isset($_SESSION["userId"])) {
+        header("Location: ../webpages/loginPage.php");
+        exit;
+}
 
     $screeningId = filter_input(
         INPUT_POST,
@@ -31,36 +31,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         die("Invalid booking information.");
     }
 
-    // Remember booking before login
-    $_SESSION["pendingBooking"] = [
-        "screeningId" => $screeningId,
-        "noOfTickets" => $noOfTickets
-    ];
-
-    // Check if user is logged in
-    if (!isset($_SESSION["userId"])) {
-        header("Location: ../webpages/loginPage.php");
-        exit;
-    }
-
-    header("Location: ../php/add_to_cart.php?resume=1");
-    exit;
-}
-
-// Require login to view cart
-if (!isset($_SESSION["userId"])) {
-    header("Location: ../webpages/loginPage.php");
-    exit;
-}
-
-// Add pending booking after login or POST
-if (
-    isset($_SESSION["pendingBooking"]) &&
-    isset($_GET["resume"])
-) {
-
-    $booking = $_SESSION["pendingBooking"];
-
     // Verify screening exists and is upcoming
     $sql = "SELECT screeningId
             FROM screenings
@@ -74,18 +44,19 @@ if (
     $screening = $stmt->get_result()->fetch_assoc();
     $stmt->close();
 
-    if (!$screening) {
-        unset($_SESSION["pendingBooking"]);
-        die("This screening is no longer available.");
+    // Create empty cart if needed
+    if (!isset($_SESSION["cart"])) {
+        $_SESSION["cart"] = [];
     }
 
-    // Add booking to cart
-    $_SESSION["cart"][] = $booking;
-
-    unset($_SESSION["pendingBooking"]);
+    // Add tickets to cart
+    $_SESSION["cart"][] = [
+        "screeningId" => $screeningId,
+        "noOfTickets" => $noOfTickets
+    ];
+}
 
     // Redirect to prevent duplicate additions on refresh
     header("Location: ../webpages/cart.php");
     exit;
-}
 ?>
