@@ -8,18 +8,10 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST") {
 }
 
 // Get values from form
+$name = trim($_POST["name"] ?? "");
 $email = trim($_POST["email"] ?? "");
 $password = $_POST["password"] ?? "";
 $confirmPassword = $_POST["confirm_password"] ?? "";
-
-// Validate input
-if (
-    !filter_var($email, FILTER_VALIDATE_EMAIL) ||
-    strlen($password) < 8 ||
-    $password !== $confirmPassword
-) {
-    die("Invalid registration information.");
-}
 
 try {
     // Check if email already exists
@@ -45,13 +37,14 @@ try {
     );
 
     // Insert new user into database
-    $sql = "INSERT INTO users (email, password)
-            VALUES (?, ?)";
+    $sql = "INSERT INTO users (name, email, password)
+            VALUES (?, ?, ?)";
 
     $stmt = $db->prepare($sql);
 
     $stmt->bind_param(
-        "ss",
+        "sss",
+        $name,
         $email,
         $hashedPassword
     );
