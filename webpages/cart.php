@@ -36,6 +36,7 @@ if ($isLoggedIn) {
 
         if ($movie) {
             $cartItems[] = [
+                "cartIndex" => $index,
                 "title" => $movie["title"],
                 "posterPath" => $movie["posterPath"],
                 "startDate" => $movie["startDate"],
@@ -108,6 +109,7 @@ if ($isLoggedIn) {
                             <tr>
                                 <th colspan="2">Movie</th>
                                 <th>Tickets</th>
+                                <th></th>
                             </tr>
                         </thead>
 
@@ -151,6 +153,16 @@ if ($isLoggedIn) {
                                     <td class="tickets-cell">
                                         <?php echo (int) $item["noOfTickets"]; ?>
                                         tickets
+                                    </td>
+
+                                    <!-- Delete Button -->
+                                    <td class="delete-cell">
+                                        <form action="../php/delete_from_cart.php" method="POST" onsubmit="return confirm('Remove this movie from your cart?');">
+                                            <input type="hidden" name="cartIndex" value="<?php echo (int) $item['cartIndex']; ?>">
+                                            <button type="submit" class="delete-button" title="Remove item" aria-label="Remove item">
+                                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                            </button>
+                                        </form>
                                     </td>
 
                                 </tr>
