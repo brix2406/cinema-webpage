@@ -1,6 +1,8 @@
 <?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 require("../php/db.php");
-include 'header.php';
 $query = "SELECT movieId, title, genre, posterPath FROM movies
           WHERE lastScreening >= CURDATE() ORDER BY lastScreening ASC";
 
@@ -31,6 +33,7 @@ if ($result) {
 </head>
 
 <body>
+  <?php include 'header.php'; ?>
   <main>
 
     <!-- Movie cards -->

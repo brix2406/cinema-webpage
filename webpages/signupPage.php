@@ -11,18 +11,7 @@
 
 <body>
   <!-- Navigation bar -->
-  <div id="site-header"></div>
-  <script>
-    fetch('header.php')
-      .then(response => {
-        if (!response.ok) throw new Error('Network response was not ok');
-        return response.text();
-      })
-      .then(data => {
-        document.getElementById('site-header').innerHTML = data;
-      })
-      .catch(error => console.error('Error loading header:', error));
-  </script>
+  <?php include 'header.php'; ?>
 
   <div class="login-container">
 
