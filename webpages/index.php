@@ -66,8 +66,9 @@ if ($result) {
                 <?php echo htmlspecialchars($movies[$i]['title']); ?>
               </h3>
               <p><?php echo htmlspecialchars($movies[$i]['genre']); ?></p>
-              <a href="movie-details.php?id=<?php echo htmlspecialchars($movies[$i]['movieId']); ?>"
-                class="ticket-button">Buy Tickets</a>
+              <a href="booking.php?movieId=<?php echo (int)$movies[$i]['movieId']; ?>" class="ticket-button">
+                  Buy Tickets
+              </a>
             </div>
           </article>
         <?php } ?>
