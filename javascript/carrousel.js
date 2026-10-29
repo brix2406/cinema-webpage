@@ -1,8 +1,8 @@
 // Replace these with your own movie banners and titles.
 const slides = [
-  { image: "../media/moviePosters/by_any_means.jpeg", title: "Experience movies on the big screen" },
-  { image: "../media/moviePosters/digger.jpeg", title: "Discover this week's biggest releases" },
-  { image: "../media/moviePosters/the_mage.jpeg", title: "Find your next movie night" }
+  { image: "../media/cinemaPicture1.jpg", title: "Experience movies on the big screen" },
+  { image: "../media/cinemaPicture2.jpg", title: "Discover this week's biggest releases" },
+  { image: "../media/cinemaPicture3.jpg", title: "Find your next movie night" }
 ];
 let currentSlide = 0;
 
