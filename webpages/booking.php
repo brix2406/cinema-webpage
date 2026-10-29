@@ -17,11 +17,11 @@ $sql = "SELECT movieId, title, genre, posterPath
         FROM movies
         WHERE movieId = ?";
 
-$stmt = $db->prepare($sql);
-$stmt->bind_param("i", $movieId);
-$stmt->execute();
-$movie = $stmt->get_result()->fetch_assoc();
-$stmt->close();
+$result = $db->prepare($sql);
+$result->bind_param("i", $movieId);
+$result->execute();
+$movie = $result->get_result()->fetch_assoc();
+$result->close();
 
 if (!$movie) {
     header("Location: movies.php");
@@ -34,10 +34,10 @@ $sql = "SELECT screeningId, startDate, startTime
         WHERE movieId = ?
         ORDER BY startDate ASC, startTime ASC";
 
-$stmt = $db->prepare($sql);
-$stmt->bind_param("i", $movieId);
-$stmt->execute();
-$result = $stmt->get_result();
+$result = $db->prepare($sql);
+$result->bind_param("i", $movieId);
+$result->execute();
+$result = $result->get_result();
 
 $screenings = [];
 $dates = [];
@@ -50,7 +50,7 @@ while ($row = $result->fetch_assoc()) {
     }
 }
 
-$stmt->close();
+$result->close();
 ?>
 
 <!DOCTYPE html>
