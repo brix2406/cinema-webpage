@@ -57,6 +57,7 @@ foreach ($queries as $query) {
     $db->query($query);
 }
 
+// Populate movies if empty
 if (!$moviesTableExisted) {
     $insertMovies = [
         "INSERT INTO movies (title, genre, description, lastScreening, trailerLink, posterPath) VALUES ('Clayface', 'Horror', 'A B-movie actor injects himself with a substance to keep himself relevant, only to find out that he can reshape his face and form, becoming a walking piece of clay.', '2027-04-13', 'https://www.youtube.com/watch?v=Fu3SrXI52zk', '../media/moviePosters/clayface.jpeg')",
@@ -83,6 +84,49 @@ if (!$moviesTableExisted) {
 
     foreach ($insertMovies as $insertQuery) {
         $db->query($insertQuery);
+    }
+}
+
+// Populate screeningRooms if empty
+$roomCheck = $db->query("SELECT COUNT(*) AS total FROM screeningRooms");
+if ($roomCheck) {
+    $roomRow = $roomCheck->fetch_assoc();
+    if ((int) $roomRow['total'] === 0) {
+        $db->query("INSERT INTO screeningRooms (noOfSeats) VALUES (75), (100), (125), (150), (175)");
+    }
+}
+
+// Populate screenings if empty
+$screeningsCheck = $db->query("SELECT COUNT(*) AS total FROM screenings");
+if ($screeningsCheck) {
+    $screeningsRow = $screeningsCheck->fetch_assoc();
+    if ((int) $screeningsRow['total'] === 0) {
+        $moviesResult = $db->query("SELECT movieId FROM movies");
+        if ($moviesResult && $moviesResult->num_rows > 0) {
+            $timeSlots = [];
+            for ($hour = 10; $hour <= 21; $hour++) {
+                foreach (['00', '15', '30', '45'] as $min) {
+                    $timeSlots[] = sprintf('%02d:%s:00', $hour, $min);
+                }
+            }
+            $timeSlots[] = '22:00:00';
+
+            $year = date('Y');
+            $stmt = $db->prepare("INSERT INTO screenings (movieId, startDate, startTime) VALUES (?, ?, ?)");
+
+            while ($movie = $moviesResult->fetch_assoc()) {
+                $movieId = (int) $movie['movieId'];
+                for ($i = 0; $i < 10; $i++) {
+                    $day = rand(1, 10);
+                    $startDate = sprintf('%s-11-%02d', $year, $day);
+                    $startTime = $timeSlots[array_rand($timeSlots)];
+
+                    $stmt->bind_param("iss", $movieId, $startDate, $startTime);
+                    $stmt->execute();
+                }
+            }
+            $stmt->close();
+        }
     }
 }
 ?>
