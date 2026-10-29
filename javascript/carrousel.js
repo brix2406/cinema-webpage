@@ -1,4 +1,3 @@
-// Replace these with your own movie banners and titles.
 const slides = [
   { image: "../media/cinemaPicture1.jpg", title: "Experience movies on the big screen" },
   { image: "../media/cinemaPicture2.jpg", title: "Discover this week's biggest releases" },

@@ -59,7 +59,6 @@ foreach ($queries as $query) {
     $db->query($query);
 }
 
-// Populate movies if empty
 if (!$moviesTableExisted) {
     $insertMovies = [
         "INSERT INTO movies (title, genre, description, lastScreening, trailerLink, posterPath) VALUES ('Clayface', 'Horror', 'A B-movie actor injects himself with a substance to keep himself relevant, only to find out that he can reshape his face and form, becoming a walking piece of clay.', '2027-04-13', 'https://www.youtube.com/watch?v=Fu3SrXI52zk', '../media/moviePosters/clayface.jpeg')",
@@ -89,7 +88,7 @@ if (!$moviesTableExisted) {
     }
 }
 
-// Populate screeningRooms if empty
+
 $roomCheck = $db->query("SELECT COUNT(*) AS total FROM screeningRooms");
 if ($roomCheck) {
     $roomRow = $roomCheck->fetch_assoc();
@@ -98,7 +97,7 @@ if ($roomCheck) {
     }
 }
 
-// Populate screenings if empty
+
 $screeningsCheck = $db->query("SELECT COUNT(*) AS total FROM screenings");
 if ($screeningsCheck) {
     $screeningsRow = $screeningsCheck->fetch_assoc();

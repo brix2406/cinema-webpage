@@ -2,13 +2,11 @@
 session_start();
 require_once '../php/db.php';
 
-// Check login
 $isLoggedIn = isset($_SESSION["userId"]);
 
-// Remember cart as login destination only when logged out
 $_SESSION["page"] = "../webpages/cart.php";
 
-// Only read cart for logged-in users
+// Only read cart for logged in users
 $cart = $isLoggedIn ? ($_SESSION["cart"] ?? []) : [];
 $cartItems = [];
 

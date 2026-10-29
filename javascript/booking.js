@@ -8,7 +8,6 @@ document.addEventListener("DOMContentLoaded", function () {
         if (!dateSelect) return;
         const selectedDate = dateSelect.value;
 
-        // Reset hidden field + uncheck old radio
         screeningIdInput.value = "";
         document.querySelectorAll('input[name="selectedTime"]').forEach(radio => {
             radio.checked = false;

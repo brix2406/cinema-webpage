@@ -1,20 +1,18 @@
 <?php
 require_once 'db.php';
 
-// Only accept POST requests
 if ($_SERVER["REQUEST_METHOD"] !== "POST") {
     header("Location: ../webpages/signupPage.php");
     exit;
 }
 
-// Get values from form
+
 $name = trim($_POST["name"] ?? "");
 $email = trim($_POST["email"] ?? "");
 $password = $_POST["password"] ?? "";
 $confirmPassword = $_POST["confirm_password"] ?? "";
 
 try {
-    // Check if email already exists
     $sql = "SELECT userId FROM users WHERE email = ?";
     $stmt = $db->prepare($sql);
 
@@ -36,7 +34,6 @@ try {
         PASSWORD_DEFAULT
     );
 
-    // Insert new user into database
     $sql = "INSERT INTO users (name, email, password)
             VALUES (?, ?, ?)";
 
@@ -52,7 +49,6 @@ try {
     $stmt->execute();
     $stmt->close();
 
-    // Redirect after successful registration
     header("Location: ../webpages/loginPage.php?registered=success");
     exit;
 

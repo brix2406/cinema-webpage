@@ -5,17 +5,16 @@ if (session_status() === PHP_SESSION_NONE) {
 
 require_once 'db.php';
 
-// Only accept POST requests
 if ($_SERVER["REQUEST_METHOD"] !== "POST") {
     header("Location: ../webpages/loginPage.php");
     exit;
 }
 
-// Get values from form
+
 $email = trim($_POST["email"] ?? "");
 $password = $_POST["password"] ?? "";
 
-// Validate input
+
 if (
     !filter_var($email, FILTER_VALIDATE_EMAIL) ||
     $password === ""
@@ -26,7 +25,6 @@ if (
 }
 
 try {
-    // Find user by email
     $sql = "SELECT userId, email, password
             FROM users
             WHERE email = ?";
@@ -40,7 +38,6 @@ try {
 
     $stmt->close();
 
-    // Check whether email exists
     if (!$user) {
         header("Location: ../webpages/loginPage.php?error=not_found");
         exit;
@@ -52,14 +49,11 @@ try {
         exit;
     }
 
-    // Regenerate session ID after successful login
-    session_regenerate_id(true);
 
-    // Store logged-in user information
+    session_regenerate_id(true);
     $_SESSION["userId"] = $user["userId"];
     $_SESSION["email"] = $user["email"];
 
-    // Redirect after successful login
 
     $prevPage = $_SESSION['page'];
     if (!$prevPage) {

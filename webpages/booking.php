@@ -4,8 +4,7 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 require_once("../php/db.php");
 
-// Get movieId from URL (support both ?movieId= and ?id=)
-$movieId = filter_input(INPUT_GET, 'movieId', FILTER_VALIDATE_INT) ?: filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+$movieId = filter_input(INPUT_GET, 'movieId', FILTER_VALIDATE_INT);
 if (!$movieId) {
     header("Location: movies.php");
     exit;

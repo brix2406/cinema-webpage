@@ -4,13 +4,12 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 require_once 'db.php';
 
-// User must be logged in
 if (!isset($_SESSION["userId"])) {
     header("Location: ../webpages/loginPage.php");
     exit;
 }
 
-$userId = (int)$_SESSION["userId"];
+$userId = (int) $_SESSION["userId"];
 
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["bookingId"])) {
     $bookingId = filter_input(INPUT_POST, "bookingId", FILTER_VALIDATE_INT);

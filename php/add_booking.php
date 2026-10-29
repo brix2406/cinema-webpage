@@ -3,7 +3,6 @@ require_once '../php/db.php';
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-// Get bookings from session
 $cart = $_SESSION["cart"] ?? [];
 $cartItems = [];
 $userId = $_SESSION["userId"];
