@@ -75,7 +75,7 @@ if (isset($_SESSION["pendingBooking"]) &&
     unset($_SESSION["pendingBooking"]);
 
     // Redirect to prevent duplicate additions on refresh
-    header("Location: add_to_cart.php");
+    header("Location: ../webpages/shoppingcart.php");
     exit;
 }
 
