@@ -58,6 +58,7 @@ if (session_status() === PHP_SESSION_NONE) {
       alert("This email is already registered. Please try to login instead.");
     }
   </script>
+  <script src="../javascript/validation.js"></script>
 </body>
 
 </html>
