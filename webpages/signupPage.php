@@ -2,6 +2,15 @@
 if (session_status() === PHP_SESSION_NONE) {
   session_start();
 }
+if (isset($_SESSION['userId'])) {
+  if (isset($_SESSION['page'])) {
+    $page = $_SESSION['page'];
+  } else {
+    $page = 'index.php';
+  }
+  header('Location: ../webPages/' . $page);
+  exit;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
