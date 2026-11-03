@@ -4,6 +4,7 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 require_once("../php/db.php");
 
+// F7 (input handling): Validate the movie ID before using it in a database query.
 $movieId = filter_input(INPUT_GET, 'movieId', FILTER_VALIDATE_INT);
 if (!$movieId) {
     header("Location: movies.php");
@@ -12,7 +13,7 @@ if (!$movieId) {
 $page = 'booking.php?movieId=' . $movieId;
 $_SESSION['page'] = $page;
 
-// Get movie info
+// F4/F5: Retrieve the selected movie using a prepared SQL statement.
 $sql = "SELECT movieId, title, genre, description, posterPath
         FROM movies
         WHERE movieId = ?";
@@ -28,7 +29,7 @@ if (!$movie) {
     exit;
 }
 
-// Get screenings for this movie
+// F4/F5: Fetch screening dates and times from the database to build the booking options dynamically.
 $sql = "SELECT screeningId, startDate, startTime
         FROM screenings
         WHERE movieId = ?
@@ -62,6 +63,7 @@ $result->close();
     <title>Booking - <?php echo ($movie['title']); ?> - Screendinavia</title>
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <!-- F6: Booking JavaScript handles the interactive screening selection (see booking.js). -->
     <script src="../javascript/booking.js" defer></script>
 </head>
 
@@ -93,6 +95,7 @@ $result->close();
                             to Movies</a>
                     </div>
                 <?php else: ?>
+                    <!-- F3: Booking form submits the chosen screening and ticket quantity to the server. -->
                     <form id="booking-form" action="../php/add_to_cart.php" method="POST">
 
                         <input type="hidden" name="movieId" value="<?php echo (int) $movie['movieId']; ?>">

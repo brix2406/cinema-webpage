@@ -5,6 +5,7 @@ if (session_status() === PHP_SESSION_NONE) {
 ?>
 
 <header class="site-header">
+    <!-- F1: Shared navigation links used across the website. -->
     <nav class="navbar">
         <a href="../webpages/index.php">
             <img src="../media/logo.png" id="logo" alt="Screendinavia" width="auto" height="55px">
@@ -12,6 +13,7 @@ if (session_status() === PHP_SESSION_NONE) {
         <div class="nav-links">
             <a href="../webpages/index.php">Home</a>
             <a href="../webpages/movies.php">Movies</a>
+            <!-- Server-generated navigation adapts to the user login session. -->
             <?php if (isset($_SESSION["userId"])): ?>
                 <a href="../webpages/myBookings.php">My Bookings</a>
                 <a href="../php/logout.php">Logout</a>

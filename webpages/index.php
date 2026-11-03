@@ -5,6 +5,7 @@ if (session_status() === PHP_SESSION_NONE) {
 $_SESSION['page'] = 'index.php';
 define('gridSize', 4);
 require("../php/db.php");
+// F4/F5: Load current movies from the database for the server-generated homepage.
 $query = "SELECT movieId, title, genre, posterPath FROM movies
           WHERE lastScreening >= CURDATE() ORDER BY lastScreening ASC";
 
@@ -31,6 +32,7 @@ if ($result) {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Screendenavia Cinema</title>
+  <!-- F8: Shared external CSS stylesheet controls the website appearance. -->
   <link rel="stylesheet" href="../style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
@@ -51,6 +53,7 @@ if ($result) {
       <button class="hero-arrow next" id="next-slide" type="button" aria-label="Next featured movie">&#10095;</button>
     </section>
 
+    <!-- F5: Create the movie preview dynamically fetching the information from the database with PHP. -->
     <section class="now-showing" aria-labelledby="now-showing-title">
       <div class="section-heading">
         <h2 id="now-showing-title">Now Showing</h2>
@@ -78,6 +81,7 @@ if ($result) {
   <footer class="site-footer">
     <p>&copy; 2026 Screendinavia Cinema</p>
   </footer>
+  <!-- Interactive homepage slideshow; implementation is in carrousel.js. -->
   <script src="../javascript/carrousel.js"></script>
 </body>
 

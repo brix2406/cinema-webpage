@@ -4,6 +4,7 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 $_SESSION['page'] = 'movies.php';
 require("../php/db.php");
+// F4/F5: Retrieve movies with upcoming screenings and generate the catalogue dynamically.
 $query = "SELECT movieId, title, genre, posterPath FROM movies
           WHERE lastScreening >= CURDATE() ORDER BY lastScreening ASC";
 
@@ -41,6 +42,7 @@ if ($result) {
       <div class="section-heading">
         <h2 id="now-showing-title">All Movies</h2>
       </div>
+      <!-- F5: PHP generates one movie card for each database record. -->
       <div class="movie-grid">
         <?php for ($i = 0; $i < count($movies); $i++) { ?>
           <article class="movie-card">

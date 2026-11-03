@@ -32,6 +32,7 @@ if (isset($_SESSION['userId'])) {
     <div id="sign-in">
       <h1>Login</h1>
 
+      <!-- F3: Login form sends credentials to the PHP authentication handler. -->
       <form action="../php/login.php" method="POST">
         <label for="login-email">E-mail</label>
         <input type="email" id="login-email" name="email" required>
@@ -53,6 +54,7 @@ if (isset($_SESSION['userId'])) {
     <p>&copy; 2026 Screendinavia Cinema</p>
   </footer>
 
+  <!-- F6: Show client-side feedback for validation/authentication results returned in the URL. -->
   <script>
     const params = new URLSearchParams(window.location.search);
 

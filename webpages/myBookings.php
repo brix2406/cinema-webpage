@@ -66,7 +66,7 @@ $stmt->close();
                 <p>You have no bookings yet.</p>
 
             <?php else: ?>
-
+                <!-- F2: Display confirmed bookings in a structured HTML table. -->
                 <table class="cart-table">
                     <thead>
                         <tr>
@@ -117,6 +117,7 @@ $stmt->close();
                                 </td>
 
                                 <td class="delete-cell">
+                                    <!-- F3: Submit a cancellation request for this booking via POST. -->
                                     <form action="../php/delete_booking.php" method="POST"
                                         onsubmit="return confirm('Are you sure you want to cancel this booking?');">
                                         <input type="hidden" name="bookingId" value="<?php echo (int) $item['bookingId']; ?>">
@@ -135,7 +136,6 @@ $stmt->close();
 
             <?php endif; ?>
 
-            <!-- Action Buttons -->
             <div class="cart-actions">
                 <a href="movies.php" class="more-tickets-button">
                     Book More Tickets
