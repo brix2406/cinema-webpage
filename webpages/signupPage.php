@@ -31,6 +31,7 @@ if (isset($_SESSION['userId'])) {
     <div id="sign-up">
       <h1>Create Account</h1>
 
+      <!-- F3: Registration form collects account details and submits them to PHP. -->
       <form action="../php/register.php" method="POST" id="signup-form">
         <label for="signup-name">Name</label>
         <input type="text" id="signup-name" name="name" required>
@@ -67,6 +68,7 @@ if (isset($_SESSION['userId'])) {
       alert("This email is already registered. Please try to login instead.");
     }
   </script>
+  <!-- F6: Client-side registration validation is implemented in validation.js. -->
   <script src="../javascript/validation.js"></script>
 </body>
 

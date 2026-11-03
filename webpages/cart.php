@@ -95,7 +95,7 @@ if ($isLoggedIn) {
                     <p>Your shopping cart is empty.</p>
 
                 <?php else: ?>
-
+                    <!-- F2: Display the cart contents in an HTML table. -->
                     <table class="cart-table">
 
                         <thead>
@@ -146,6 +146,7 @@ if ($isLoggedIn) {
                                     </td>
 
                                     <td class="delete-cell">
+                                        <!-- F3: Submit a selected cart item for removal via POST. -->
                                         <form action="../php/delete_from_cart.php" method="POST"
                                             onsubmit="return confirm('Remove this movie from your cart?');">
                                             <input type="hidden" name="cartIndex" value="<?php echo (int) $item['cartIndex']; ?>">
